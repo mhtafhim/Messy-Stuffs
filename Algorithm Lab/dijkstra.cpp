@@ -8,33 +8,38 @@ vector<int> topoSorted;
 bool visited[1000] = {false};
 vector<int> parents(1000,-1);
 vector<long long>cost(1000,INF);
-int it= 0;
+//int it= 0;
 
 void dijkstra(vector<pair<int,int>> adj[],int v)
 {
     visited[v] = true;
 
-    priority_queue<int> q;
-    q.push(v);
+    priority_queue<pair<int ,int>> q;
+    q.push(make_pair(0,v));
 
     while(!q.empty())
     {
-        int n = q.top();
+        int n = q.top().second;
+     //   cout << "visiting " <<n << " with distance " << q.top().first << endl;
         visited[n] = true;
         q.pop();
         for(auto u : adj[n])
         {
-            it++;
+       //     it++;
+
 
             if(!visited[u.first])
                 if(cost[u.first] > cost[n]+u.second)
             {
-                q.push(u.first);
+                q.push(make_pair((-1)*(cost[n]+u.second),u.first));
+         //       cout  << "               pushing " << u.first << " with distance " <<  cost[n]+u.second << endl;
                 cost[u.first] = cost[n]+u.second;
                 parents[u.first] = n ;
             }
         }
     }
+
+    cout << endl;
 }
 
 
@@ -119,7 +124,7 @@ int main()
         printPath(source,i);
     }
 
-    cout << endl << it << endl;
+   // cout << endl << it << endl;
 
 
 
