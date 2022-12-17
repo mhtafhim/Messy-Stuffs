@@ -14,27 +14,31 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
 {
     visited[v] = true;
 
-    priority_queue<pair<int ,int>> q;
+    priority_queue<pair<int,int>> q;
     q.push(make_pair(0,v));
 
     while(!q.empty())
     {
+
+
         int n = q.top().second;
-     //   cout << "visiting " <<n << " with distance " << q.top().first << endl;
-        visited[n] = true;
-        q.pop();
-        for(auto u : adj[n])
+
+        if(!visited[n])
         {
-       //     it++;
-
-
-            if(!visited[u.first])
-                if(cost[u.first] > cost[n]+u.second)
+            //   cout << "visiting " <<n << " with distance " << q.top().first << endl;
+            visited[n] = true;
+            q.pop();
+            for(auto u : adj[n])
             {
-                q.push(make_pair((-1)*(cost[n]+u.second),u.first));
-         //       cout  << "               pushing " << u.first << " with distance " <<  cost[n]+u.second << endl;
-                cost[u.first] = cost[n]+u.second;
-                parents[u.first] = n ;
+                //     it++;
+                if(!visited[u.first])
+                    if(cost[u.first] > cost[n]+u.second)
+                    {
+                        q.push(make_pair((-1)*(cost[n]+u.second),u.first));
+                        //       cout  << "               pushing " << u.first << " with distance " <<  cost[n]+u.second << endl;
+                        cost[u.first] = cost[n]+u.second;
+                        parents[u.first] = n ;
+                    }
             }
         }
     }
@@ -47,20 +51,20 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
 void printPath(int s,int d)
 {
     vector<int>path;
-   /* if(parents[d]==(-1))
-    {
-        cout << "From " << s << " to " << d <<" : ";
-        cout << "Cant reach there." << endl;
-        return;
-    }
-    */
+    /* if(parents[d]==(-1))
+     {
+         cout << "From " << s << " to " << d <<" : ";
+         cout << "Cant reach there." << endl;
+         return;
+     }
+     */
     int i = d;
     while(i!=-1)
     {
         path.push_back(i);
         i = parents[i];
     }
-  //  path.push_back(s);
+    //  path.push_back(s);
 
 
     reverse(path.begin(),path.end());
@@ -124,7 +128,7 @@ int main()
         printPath(source,i);
     }
 
-   // cout << endl << it << endl;
+    // cout << endl << it << endl;
 
 
 
