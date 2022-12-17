@@ -22,12 +22,11 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
 
 
         int n = q.top().second;
+        q.pop();
 
-        if(!visited[n])
-        {
-            //   cout << "visiting " <<n << " with distance " << q.top().first << endl;
+           // cout << "visiting " <<n << " with distance " << q.top().first << endl;
             visited[n] = true;
-            q.pop();
+
             for(auto u : adj[n])
             {
                 //     it++;
@@ -40,7 +39,7 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
                         parents[u.first] = n ;
                     }
             }
-        }
+
     }
 
     cout << endl;
@@ -93,14 +92,18 @@ void printPath(int s,int d)
 void add_edge(vector<pair<int,int>> adj[],int s,int d,int w)
 {
     adj[s].push_back(make_pair(d,w));
-    adj[d].push_back(make_pair(s,w));
+   // adj[d].push_back(make_pair(s,w));
 }
 
 int main()
 {
     int v,e;
-    cin >> v>>e;
+    cout << "Enter the number of vertices : ";
+    cin >> v;
+    cout << "Enter the number of edges : ";
+    cin >>e;
     int s,d,w;
+    cout << "Now enter all the edges and weights (with separated space) : \n";
     vector<pair<int,int>> adj[v+1];
     for(int i =0; i<e; i++)
     {
@@ -110,6 +113,7 @@ int main()
 
 
     int source;
+    cout << "Enter the source : ";
     cin>> source;
     cost[source] =0;
 
