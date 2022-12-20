@@ -28,7 +28,7 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
 
 
 
-            // cout << "visiting " <<n << " with distance " << q.top().first << endl;
+         //    cout << "visiting " <<n << " with distance " << q.top().first << endl;
             visited[n] = true;
 
             for(auto u : adj[n])
@@ -38,7 +38,7 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
                     if(cost[u.first] > cost[n]+u.second)
                     {
                         q.push(make_pair((-1)*(cost[n]+u.second),u.first));
-                        //       cout  << "               pushing " << u.first << " with distance " <<  cost[n]+u.second << endl;
+                     //         cout  << "               pushing " << u.first << " with distance " <<  cost[n]+u.second << endl;
                         cost[u.first] = cost[n]+u.second;
                         parents[u.first] = n ;
                     }
