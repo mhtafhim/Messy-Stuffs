@@ -12,7 +12,7 @@ vector<long long>cost(1000,INF);
 
 void dijkstra(vector<pair<int,int>> adj[],int v)
 {
-    visited[v] = true;
+    // visited[v] = true;
 
     priority_queue<pair<int,int>> q;
     q.push(make_pair(0,v));
@@ -23,8 +23,12 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
 
         int n = q.top().second;
         q.pop();
+        if(!visited[n])
+        {
 
-           // cout << "visiting " <<n << " with distance " << q.top().first << endl;
+
+
+            // cout << "visiting " <<n << " with distance " << q.top().first << endl;
             visited[n] = true;
 
             for(auto u : adj[n])
@@ -39,6 +43,7 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
                         parents[u.first] = n ;
                     }
             }
+        }
 
     }
 
@@ -92,7 +97,7 @@ void printPath(int s,int d)
 void add_edge(vector<pair<int,int>> adj[],int s,int d,int w)
 {
     adj[s].push_back(make_pair(d,w));
-   // adj[d].push_back(make_pair(s,w));
+    // adj[d].push_back(make_pair(s,w));
 }
 
 int main()
