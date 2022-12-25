@@ -1,0 +1,122 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+FIRST DB 'ENTER THE FIRST ALPHABET : $'
+SECOND DB 'ENTER THE SECOND ALPHABET: $'
+RESULT DB 'THE FOLLOWING  ALPHABETICAL ORDER : $'
+
+.CODE
+MAIN PROC
+    ;DATA SEGMENT INITIALIZE
+    
+    MOV AX,@DATA
+    MOV DS,AX        ;CONVERTING DATA SEGMENT INTO CODE SEGMENT
+    
+    
+    ;PRINTING THE  STRING
+    MOV AH,9
+    LEA DX,FIRST
+    INT 21H     
+    
+    ;TAKING 1ST USER INPUT
+    MOV AH,1
+    INT 21H
+    MOV BL,AL 
+
+
+    ;PRINTING NEW LINE
+    MOV AH,2
+    MOV DL,10
+    INT 21H
+    MOV DL,13
+    INT 21H
+
+
+    ;PRINTING THE  STRING
+    MOV AH,9
+    LEA DX,SECOND
+    INT 21H     
+    
+    ;TAKING 2ND USER INPUT
+    MOV AH,1
+    INT 21H
+    MOV CL,AL 
+    
+     
+    
+    CMP CL,BL
+    JG HIGH_RANGE
+    JLE LOW_RANGE 
+    
+    
+    HIGH_RANGE:
+    
+    ;PRINTING NEW LINE
+    MOV AH,2
+    MOV DL,10
+    INT 21H
+    MOV DL,13
+    INT 21H
+
+    ;PRINTING THE STRING
+
+    MOV AH,9
+    LEA DX,RESULT
+    INT 21H
+    
+    
+    MOV AH,2
+    MOV DL,BL
+    INT 21H 
+    
+    MOV AH,2
+    MOV DL,'-'
+    INT 21H 
+    
+    MOV AH,2
+    MOV DL,CL
+    INT 21H   
+    JMP EXIT
+    
+    
+    LOW_RANGE:
+    
+    ;PRINTING NEW LINE
+    MOV AH,2
+    MOV DL,10
+    INT 21H
+    MOV DL,13
+    INT 21H
+
+
+
+    MOV AH,9
+    LEA DX,RESULT
+    INT 21H
+    
+    MOV AH,2
+    MOV DL,CL
+    INT 21H 
+    
+    MOV AH,2
+    MOV DL,'-'
+    INT 21H 
+    
+    MOV AH,2
+    MOV DL,BL
+    INT 21H   
+    JMP EXIT  
+    
+    
+    
+    
+
+
+
+
+        EXIT:
+     
+    MOV AH,4CH
+    INT 21H
+    MAIN ENDP
+END MAIN  
