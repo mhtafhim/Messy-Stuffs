@@ -49,10 +49,10 @@ void syntheticDivision(double a[],double x,int n)
 void allPossibleRoot()
 {
 
-    double poly[] = {1,-5,-35,125,194,-280};
-    double derivate[] = {5,-20,-105,250,194};
-    double x = 3;
-    int degree =  5;
+    double poly[] = {1,-7,15,-9};
+    double derivate[] = {3,-14,15};
+    double x = 4;
+    int degree =  3;
     double h;
     int it = 0;
 
@@ -74,9 +74,9 @@ void allPossibleRoot()
 
             x = h;
         }
-        while (fabs(func(poly,degree,x)) >= 0.0001);
+        while (fabs(func(poly,degree,x)) >= 0.00000001);
 
-        cout << "root no "<< it <<": " << x << endl ;
+        cout << "root no "<< it <<": " << (double)x << endl ;
 
 
         syntheticDivision(poly,x,degree);
