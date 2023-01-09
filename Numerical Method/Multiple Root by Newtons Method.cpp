@@ -2,6 +2,15 @@
 
 using namespace std;
 
+void findDerivate(double arr[],double derivate[],int degree)
+{
+    int temp = degree;
+    for(int i=0;i<degree;i++)
+    {
+       derivate[i] = arr[i]*temp;
+       temp--;
+    }
+}
 
 double func(double arr[],double degree,double x)
 {
@@ -16,59 +25,71 @@ double func(double arr[],double degree,double x)
 
 }
 
+void syntheticDivision(double a[],double x,int n)
+{
+    double b[n];
+    b[0] = a[0];
+
+    for(int i =1; i<=n; i++)
+    {
+        b[i] = a[i] + x*b[i-1];
+    }
+
+    n--;
+
+    for(int i =0; i<=n; i++)
+    {
+        a[i] = b[i];
+    }
+
+}
+
 
 
 void allPossibleRoot()
 {
-    double a,b,ds,degree,error;
+
+    double poly[] = {1,-5,-35,125,194,-280};
+    double derivate[] = {5,-20,-105,250,194};
+    double x = 3;
+    int degree =  5;
+    double h;
+    int it = 0;
 
 
-    cin >> a>>b>>ds>>degree>>error;
-    double poly[degree+1];
-    for(int i =0; i<=degree; i++)
+    while(degree>1)
     {
-        cin >> poly[i];
-    }
+        it++;
 
-    double x1=a,x2=a+ds,xr,err;
-
-    while(x2<b)
-    {
-        x1=a;
-        x2 = a+ds;
-
-        if((func(poly,degree,x1)*func(poly,degree,x2))>0)
+        do
         {
-            cout << "wrong guess " << endl;
-        }
-        else
-        {
-            do
+            if(func(derivate,degree-1,x)==0)
             {
-                xr = (x1+x2)/2;
-
-                if((func(poly,degree,x1)*func(poly,degree,x2))<0)
-                {
-                    x2 = xr;
-                }
-                else
-                {
-                    x1 = xr;
-                }
-
-                err = fabs((x2-x1)/x2);
-
+                cout << "math error" << endl;
+                return;
             }
-            while(err >= error);
 
-            cout << xr << endl;
+            h = x - func(poly,degree,x)/func(derivate,degree-1,x);
+        //    cout << h << endl;
 
-            if(x2>b)
-                break;
-
+            x = h;
         }
-        a = x2;
+        while (fabs(func(poly,degree,x)) >= 0.0001);
+
+        cout << "root no "<< it <<": " << x << endl ;
+
+
+        syntheticDivision(poly,x,degree);
+        degree--;
+
+         findDerivate(poly,derivate,degree);
+
     }
+
+    x = ((-1)*poly[1])/poly[0];
+
+    cout << "root no "<< ++it <<": " << x << endl ;
+
 
 }
 

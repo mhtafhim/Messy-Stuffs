@@ -24,11 +24,13 @@ void allPossibleRoot()
     int degree;
 
     cin >> a>>b>>ds>>degree>>error;
-    double poly[degree+1];
-    for(int i =0; i<=degree; i++)
-    {
-        cin >> poly[i];
-    }
+
+    double poly[] = {1,-5,-35,125,194,-280};
+
+    double a = -4.358899,b = 4.358899;
+    int degree =  5;
+    double h;
+    int it = 0;
 
     double x1=a,x2=a+ds,xr,err;
 

@@ -22,10 +22,10 @@ double func(double arr[],double degree,double x)
 int main()
 {
 
-    double poly[] = {2, -6, 2, -1};
-    double derivate[] = {6,-12,2};
+    double poly[] = {1,-5,-35,125,194,-280};
+    double derivate[] = {5,-20,-105,250,194};
     double x = 3;
-    int degree =  3;
+    int degree =  5;
     double h;
 
 
@@ -38,7 +38,7 @@ int main()
         }
 
         h = x - func(poly,3,x)/func(derivate,2,x);
-        cout << h << endl;
+      //  cout << h << endl;
 
         x = h;
     }while (fabs(func(poly,3,x)) >= 0.0000001);
