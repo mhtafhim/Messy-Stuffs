@@ -7,22 +7,34 @@ using namespace std;
 const int INF = 1e7;
 int D[1000][1000];
 int pi[1000][1000];
-int adj[1000][1000];
+//int adj[1000][1000];
 
-void warshall(int v)
+void warshall(vector<pair<int,int>> adj[], int v)
 {
+    for(int i = 1 ; i<=v; i++)
+    {
+        for(auto u : adj[i])
+        {
+
+            D[i][u.first] = u.second;
+            pi[i][u.first] = i;
+        }
+    }
+
+    cout << "D(0) :" << endl;
     for(int i = 1 ; i<=v; i++)
     {
         for(int j = 1 ; j<=v; j++)
         {
-            if(adj[i][j]!=0)
+            if(D[i][j]>INF-1000)
             {
-                D[i][j] = adj[i][j];
-                pi[i][j] = i;
+                cout << "i/N    ";
             }
+            else
+                cout << D[i][j] << "/" << pi[i][j] << "    ";
         }
+        cout << endl;
     }
-
 
 
 
@@ -40,55 +52,23 @@ void warshall(int v)
                 }
             }
         }
-
+        cout << endl  <<"D(" <<i<<") : " << endl << endl ;
+        for(int i = 1 ; i<=v; i++)
+        {
+            for(int j = 1 ; j<=v; j++)
+            {
+                if(D[i][j]>INF-1000)
+                {
+                    cout << "i/N    ";
+                }
+                else
+                    cout << D[i][j] << "/" << pi[i][j] << "    ";
+            }
+            cout << endl;
+        }
     }
-
 
 }
-
-/*
-
-void printPath(int s,int d)
-{
-    vector<int>path;
-    /* if(parents[d]==(-1))
-     {
-         cout << "From " << s << " to " << d <<" : ";
-         cout << "Cant reach there." << endl;
-         return;
-     }
-
-    int i = d;
-    while(i!=-1)
-    {
-        path.push_back(i);
-        i = parents[i];
-    }
-    //  path.push_back(s);
-
-
-    reverse(path.begin(),path.end());
-
-
-    cout << "From " << s << " to " << d <<" : ";
-    for(auto it : path)
-    {
-        if(it == s)
-        {
-            cout << it;
-        }
-        else
-        {
-            cout << " -> " << it ;
-        }
-
-    }
-
-    cout << " and shorted distance : "<< cost[d]<< endl;
-
-    path.clear();
-}
- */
 
 int main()
 {
@@ -101,11 +81,13 @@ int main()
     cout << "Now enter all the edges and weights (with separated space) : \n";
 //   int adj[v+1][v+1];
 
+    vector<pair<int,int>> adj[v+1];
+
     for(int i=1; i<=v; i++)
     {
         for(int j = 1 ; j<=v; j++)
         {
-            adj[i][j] = 0;
+
             if(i==j)
             {
                 D[i][j] = 0;
@@ -124,11 +106,11 @@ int main()
     for(int i =0; i<e; i++)
     {
         cin >> s>>d>>w;
-        adj[s][d] = w;
+        adj[s].push_back(make_pair(d,w));
     }
 
 
-    warshall(v);
+    warshall(adj,v);
 
 
     cout <<endl<< "Final Output Matrix : " << endl;
@@ -141,7 +123,8 @@ int main()
             {
                 cout << "i/N    ";
             }
-            else cout << D[i][j] << "/" << pi[i][j] << "    ";
+            else
+                cout << D[i][j] << "/" << pi[i][j] << "    ";
         }
         cout << endl;
     }
