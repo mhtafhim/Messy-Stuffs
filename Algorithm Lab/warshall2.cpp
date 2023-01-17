@@ -1,16 +1,12 @@
 #include<bits/stdc++.h>
-
-
 using namespace std;
 
-
 const int INF = 1e9;
-int D[1000][1000];
-int pi[1000][1000];
-//int adj[1000][1000];
+int D[10000][10000];
+int pi[10000][10000];
 
 
-void printMatrix(int v)
+void printMatrix(int v)  // this function is to print the matrix
 {
      for(int i = 1 ; i<=v; i++)
     {
@@ -31,26 +27,14 @@ void printMatrix(int v)
 void printPath(int s,int d)
 {
     vector<int>path;
-    /* if(parents[d]==(-1))
-     {
-         cout << "From " << s << " to " << d <<" : ";
-         cout << "Cant reach there." << endl;
-         return;
-     }
-     */
+
     int i = d;
     while(i!=-1)
     {
         path.push_back(i);
         i = pi[s][i];
     }
-    //  path.push_back(s);
-
-
     reverse(path.begin(),path.end());
-
-
-
 
     cout << "From " << s << " to " << d <<" : ";
     if(path[0]==s)
@@ -78,10 +62,7 @@ void printPath(int s,int d)
     }
 
     path.clear();
-
-
 }
-
 
 
 void warshall(vector<pair<int,int>> adj[], int v)
@@ -97,7 +78,7 @@ void warshall(vector<pair<int,int>> adj[], int v)
     }
 
     cout << "D(0) :" << endl;
-    printMatrix(v);
+    printMatrix(v);   // printing D(0) matrix
 
 
 
@@ -116,7 +97,7 @@ void warshall(vector<pair<int,int>> adj[], int v)
             }
         }
         cout << endl  <<"D(" <<k<<") : " << endl << endl ;
-        printMatrix(v);
+        printMatrix(v);  // printing each matrix in every iteration
     }
 
 }
@@ -163,21 +144,13 @@ int main()
 
     warshall(adj,v);
 
-
-    cout <<endl<< "Final Output Matrix : " << endl;
-
-    printMatrix(v);
-
-
-
     cout << endl;
-
 
     for(int i = 1 ; i<=v; i++)
     {
         for(int j = 1 ; j<=v; j++)
         {
-            printPath(i,j);
+            printPath(i,j);        //printing every possible path
 
         }
         cout << endl;
