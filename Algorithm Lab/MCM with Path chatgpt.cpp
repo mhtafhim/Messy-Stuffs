@@ -7,16 +7,16 @@ using namespace std;
 int m[5][5], bracket[5][5];
 
 
-void printOptimalParens(int i, int j, vector<vector<int>> matrix)
+void printOptimalParens(int i, int j, int n, int *bracket, int &count)
 {
     if (i == j)
     {
-        cout << "A" << i;
+        cout << "A" << count++;
         return;
     }
     cout << "(";
-    printOptimalParens(i, matrix[i][j],matrix);
-    printOptimalParens(matrix[i][j]+1, j,matrix);
+    printOptimalParens(i, *((bracket + i * n) + j), n, bracket, count);
+    printOptimalParens(*((bracket + i * n) + j) + 1, j, n, bracket, count);
     cout << ")";
 }
 
@@ -35,7 +35,7 @@ int MatrixChainOrder(const vector<int> &p, int n)
             int j = i + L - 1;
             m[i][j] = INT_MAX;
             for (int k = i; k <= j - 1; k++)
-            {            //    cout << i-1 << "  "<<k<< " "<<j<<endl;
+            {                cout << i-1 << "  "<<k<< " "<<j<<endl;
 
                 int q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
                 if (q < m[i][j])

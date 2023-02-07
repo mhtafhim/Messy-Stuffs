@@ -27,9 +27,31 @@ int main()
 {
 
     fast
-    int n=4;
-  //  int p[]= {10,5,1,10,2,10};
-  int p[] = {3,2,4,2,5};
+    int n=5;
+    int p[]= {10,5,1,10,2,10};
+  //int p[] = {3,2,4,2,5};
+/*
+  vector<int> p;
+  cin >> n;
+
+  int col,row;
+  cin >> col>>row;
+  p.push_back(col);
+  p.push_back(row);
+  for(int i=1;i<n;i++)
+  {
+      cin >> col >> row;
+      p.push_back(row);
+  }
+
+
+  for(int i =0;i<=n;i++)
+  {
+      cout << p[i] << " ";
+  }
+
+  cout << endl;
+*/
 
     vector< vector<int>> m(n+1, vector<int> (n+1));
     vector< vector<int>> s(n+1, vector<int> (n+1));
@@ -86,7 +108,7 @@ int main()
 
     cout << endl<< endl;
 
-    printOptimalParens(1,4,s);
+    printOptimalParens(1,n,s);
     cout << " : Minimum cost = " << m[1][5]<< endl;
 
 
