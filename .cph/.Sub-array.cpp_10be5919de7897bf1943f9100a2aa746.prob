@@ -1,0 +1,1 @@
+{"name":"Local: Sub-array","url":"c:\\Users\\mhtaf\\Documents\\GitHub\\Messy-Stuffs\\Sub-array.cpp","tests":[{"id":1697279115824,"input":"2\n4\n1 0 1 0\n7\n1 1 2 3 3 4 7","output":"Case 1: 6\nCase 2: 19"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\mhtaf\\Documents\\GitHub\\Messy-Stuffs\\Sub-array.cpp","group":"local","local":true}
