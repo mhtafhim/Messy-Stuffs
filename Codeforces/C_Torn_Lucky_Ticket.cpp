@@ -1,97 +1,88 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long int
-#define fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define fast                          \
+    ios_base::sync_with_stdio(false); \
+    cin.tie(NULL);                    \
+    cout.tie(NULL)
 #define mod 1000000007
 #define inf 1e18
 
-
-bool ok(string one,string two)
+void solve(int cs)
 {
 
-    
-    string nw = one + two;
- 
+    ll n;
+    cin >> n;
 
-    int sz = nw.size();
+    map<int, int> mp[6];
+    ll cnt = n;
 
-    if(sz&1) return false;
+    vector<pair<int,int>> vec;
+    vector<string> ss;
 
-    int half = sz/2;
-    int sum = 0 ,sum2 = 0;
-    for(int i =0 ; i < half ; i ++)
+    for (int k = 0; k < n; k++)
     {
-        sum += nw[i];
+        string tmp;
+        cin >> tmp;
+        vec.push_back({tmp.size(),k});
+        ss.push_back(tmp);
     }
 
-    for(int i = half ; i < sz ; i ++)
+    sort(vec.begin(),vec.end());
+    for(auto u : vec)
     {
-        sum2 += nw[i];
+
+        string tmp;
+        tmp = ss[u.second];
+
+        int sz = tmp.size();
+        int sum = 0;
+
+        for (int i = 0; i < sz; i++)
+        {
+            sum += (tmp[i] - '0');
+        }
+
+        int sum1 = sum, sum2 = sum;
+      //  cout << "sum = " << sum1 << endl;
+
+       
+        //    cnt += mp[sz][sum];
+
+        for (int i = 0; i < sz; i++)
+        {
+            int inx = (sz - (2 * i));
+
+            if (inx < 0)
+                continue;
+
+            cnt += mp[inx][sum1];
+            cnt += mp[inx][sum2];
+
+        //    cout << inx << " " << sum1 << " mp[inx][sum1] = " << mp[inx][sum1] << endl;
+
+        //    cout << inx << " " << sum2 << " mp[inx][sum2] = " << mp[inx][sum2] << endl;
+
+            sum1 -= 2*(tmp[i] -'0');
+            sum2 -= 2*(tmp[sz - 1 - i] - '0');
+        }
+
+         mp[sz][sum]++;
+      //   cout << endl;
     }
 
-    if(sum == sum2) return true;
-    else return false;
-
+    cout << cnt << endl;
 }
 
-
-void solve(int cs){
-        int n;
-
-        cin >> n ;
-
-
-        vector<string> vec(n),even,odd;
-        ll cnt = 0 ;
-
-        for(int i = 0 ; i < n ; i ++)
-        {
-            cin >> vec[i];
-            if(vec[i].size()%2==0)
-            {
-                even.push_back(vec[i]);
-            }
-            else
-            {
-                odd.push_back(vec[i]);
-            }
-        }
-
-        int esz = even.size();
-        int osz = odd.size();
-
-        for(int i = 0 ; i < esz ; i ++)
-        {
-            for(int j = 0 ; j < esz ; j ++)
-            {
-                if(ok(even[i],even[j])) cnt++;
-            }
-        }
-
-        for(int i = 0 ; i < osz ; i ++)
-        {
-            for(int j = 0 ; j < osz ; j ++)
-            {
-                if(ok(odd[i],odd[j])) cnt++;
-            }
-        }
-
-        cout << cnt << endl;
-
-        
-
-
-
-}
-
-int main(){
+int main()
+{
     fast;
-    int t=1;
- //   cin>>t;
-    for(int i=1;i<=t;i++)
+    int t = 1;
+    //    cin>>t;
+    for (int i = 1; i <= t; i++)
     {
-       // cout << "Case " << i  << ":\n";
+        // cout << "Case " << i  << ":\n";
         solve(i);
-    } 
+    }
     return 0;
 }

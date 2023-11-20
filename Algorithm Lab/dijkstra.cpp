@@ -19,14 +19,10 @@ void dijkstra(vector<pair<int,int>> adj[],int v)
 
     while(!q.empty())
     {
-
-
         int n = q.top().second;
         q.pop();
         if(!visited[n])
         {
-
-
 
          //    cout << "visiting " <<n << " with distance " << q.top().first << endl;
             visited[n] = true;
@@ -103,12 +99,12 @@ void add_edge(vector<pair<int,int>> adj[],int s,int d,int w)
 int main()
 {
     int v,e;
-    cout << "Enter the number of vertices : ";
+   // cout << "Enter the number of vertices : ";
     cin >> v;
-    cout << "Enter the number of edges : ";
+   // cout << "Enter the number of edges : ";
     cin >>e;
     int s,d,w;
-    cout << "Now enter all the edges and weights (with separated space) : \n";
+   // cout << "Now enter all the edges and weights (with separated space) : \n";
     vector<pair<int,int>> adj[v+1];
     for(int i =0; i<e; i++)
     {
