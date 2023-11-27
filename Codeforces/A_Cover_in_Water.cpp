@@ -12,48 +12,30 @@ void solve(int cs)
 {
     int n;
     cin >> n;
-    vector<int> v;
     int cnt = 0;
     int mx = 0;
-
+    ll ans = 0;
     for (int i = 0; i < n; i++)
     {
         char tmp;
         cin >> tmp;
         if (tmp == '#')
         {
-            if (cnt > 0)
-                v.push_back(cnt);
+            ans += cnt;
             mx = max(mx, cnt);
-         //   cout << "cnt = " << cnt << endl;
             cnt = 0;
         }
         else
-        {
             cnt++;
-        }
-        // cin >> v[i];
     }
 
-    if (cnt > 0)
-        v.push_back(cnt);
+    ans += cnt;
     mx = max(mx, cnt);
-   // cout << "cnt = " << cnt << endl;
-    cnt = 0;
 
-    sort(v.rbegin(), v.rend());
-    int ans = 0;
     if (mx > 2)
-    {
         cout << 2 << endl;
-    }
     else
-    {
-
-        int ans = 0;
-        for(auto u : v) ans += u;
         cout << ans << endl;
-    }
 }
 
 int main()

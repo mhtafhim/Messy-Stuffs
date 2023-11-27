@@ -1,17 +1,18 @@
 import heapq
 
 class Node:
-    def __init__(self, state, parent, heuristic):
+    def __init__(self, state, parent, cost, heuristic):
         self.state = state
         self.parent = parent
+        self.cost = cost
         self.heuristic = heuristic
 
     def __lt__(self, other):
-        return (self.heuristic) < (other.heuristic)
+        return (self.cost + self.heuristic) < (other.cost + other.heuristic)
 
 def best_first_search(start, goal, successors, heuristic):
     closed_list = set()
-    open_list = [Node(start, None, heuristic(start))]
+    open_list = [Node(start, None, 0, heuristic(start))]
     
     while open_list:
         current_node = heapq.heappop(open_list)
@@ -29,16 +30,16 @@ def best_first_search(start, goal, successors, heuristic):
                 current_node = current_node.parent
             return path[::-1]
 
-        for successor in successors(current_state):
+        for successor, cost in successors(current_state):
             if successor not in closed_list:
-                new_node = Node(successor, current_node, heuristic(successor))
+                new_node = Node(successor, current_node, current_node.cost + cost, heuristic(successor))
                 heapq.heappush(open_list, new_node)
 
     return None
 
 
 def successors(state):
-    graph = {'A': ['B', 'C'], 'B': ['D'], 'C': ['D'], 'D': []}
+    graph = {'A': [('B', 5), ('C', 2)], 'B': [('D', 3)], 'C': [('D', 4)], 'D': []}
     return graph.get(state, [])
 
 def heuristic(state):
