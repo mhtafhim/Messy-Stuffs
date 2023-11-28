@@ -9,6 +9,17 @@ using namespace std;
 
 
 void solve(int cs){
+
+    
+
+    string x = "বাইরে চলে গিয়েছে" ; 
+
+    for(int i = 0 ; i < 50 ; i ++)
+    {
+        cout << (wchar_t)x[0] << endl;
+    }
+    cout << x << endl;
+    cout << "//বাইরে চলে গিয়েছে" << endl;
     
 }
 
