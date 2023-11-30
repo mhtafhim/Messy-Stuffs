@@ -1,15 +1,18 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <algorithm> 
 using namespace std;
 
 struct proc
 {
     int procNo, arrival, cputime;
     int waitingTime, TurnaroundTime, completionTime;
+    bool processed = false;
 
+    
     proc() : procNo(0), arrival(0), cputime(0) {}
 };
+
 
 bool compareByArrival(const proc &a, const proc &b)
 {
@@ -18,6 +21,11 @@ bool compareByArrival(const proc &a, const proc &b)
 bool compareByNo(const proc &a, const proc &b)
 {
     return a.procNo < b.procNo;
+}
+
+bool compareByCpuTime(const proc &a, const proc &b)
+{
+    return a.cputime < b.cputime;
 }
 
 int main()
@@ -48,28 +56,44 @@ int main()
     process[0].TurnaroundTime = process[0].cputime;
 
     process[0].completionTime = process[0].cputime;
+    process[0].processed = true;
 
     int sumWaitingTime = process[0].waitingTime, sumTurnAround = process[0].TurnaroundTime;
 
+    int curr = 1;
+    int currentTime = process[0].completionTime;
+
     for (int i = 1; i < n; i++)
     {
-        process[i].waitingTime = max(0, process[i - 1].completionTime - process[i].arrival);
-        if (process[i].waitingTime == 0)
+        curr = -1;
+        for (int j = 0; j < n; j++)
         {
-            process[i].completionTime = process[i].arrival + process[i].cputime;
+            if (!process[j].processed && (curr == -1 || process[j].cputime < process[curr].cputime && currentTime >= process[j].arrival))
+            {
+                curr = j;
+            }
+        }
+
+     //   cout << curr << endl;
+        process[curr].waitingTime = max(0, currentTime - process[curr].arrival);
+        if (process[curr].waitingTime == 0)
+        {
+            process[curr].completionTime = process[curr].arrival + process[curr].cputime;
         }
         else
         {
-            process[i].completionTime = process[i - 1].completionTime + process[i].cputime;
+            process[curr].completionTime = currentTime + process[curr].cputime;
         }
 
-        process[i].TurnaroundTime = process[i].waitingTime + process[i].cputime;
+        process[i].TurnaroundTime = process[curr].waitingTime + process[curr].cputime;
+        process[curr].processed = true;
 
-        sumWaitingTime += process[i].waitingTime;
-        sumTurnAround += process[i].TurnaroundTime;
+        sumWaitingTime += process[curr].waitingTime;
+        sumTurnAround += process[curr].TurnaroundTime;
+        currentTime = process[curr].completionTime;
     }
 
-    //  sort(process.begin(), process.end(), compareByNo);
+    sort(process.begin(), process.end(), compareByNo);
     cout << "Proc     WT    TAT     CT  " << endl;
 
     for (int i = 0; i < n; i++)
