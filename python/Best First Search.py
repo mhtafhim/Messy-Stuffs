@@ -9,7 +9,7 @@ class Node:
     def __lt__(self, other):
         return (self.heuristic) < (other.heuristic)
 
-def best_first_search(start, goal, successors, heuristic):
+def best_first_search(start, goal, heuristic):
     closed_list = set()
     open_list = [Node(start, None, heuristic(start))]
     
