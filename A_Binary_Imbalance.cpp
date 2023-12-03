@@ -7,13 +7,27 @@ using namespace std;
 
 
 void solve(int cs){
+    ll n;
+    cin >> n;
+    string ss;
+    cin >> ss;
+
+    bool ok = false;
+
+    for(int i = 0 ; i < ss.length(); i++)
+    {
+        if(ss[i] == '0') ok = true;
+    }
+
+    if(ok) cout << "YES" << endl;
+    else cout << "NO" << endl;
     
 }
 
 int main(){
     fast;
     int t=1;
-//    cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++)
     {
        // cout << "Case " << i  << ":\n";
