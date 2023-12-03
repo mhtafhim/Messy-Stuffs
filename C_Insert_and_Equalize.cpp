@@ -12,10 +12,8 @@ void solve(int cs)
 {
     ll n;
     cin >> n;
-
     bool ok = true;
-
-    vector<ll> v(n);
+    vector<ll> v(n), diff;
     unordered_set<ll> st;
     for (int i = 0; i < n; i++)
     {
@@ -31,42 +29,33 @@ void solve(int cs)
 
     ll mx = *max_element(v.begin(), v.end());
 
-    vector<ll> diff;
     for (int i = 0; i < n; i++)
-    {
-        //    if((v[i]- v[i+1]) )
         diff.push_back(abs(mx - v[i]));
-        //   cout << abs(mx - v[i]) << " ";
-    }
-    //  cout << endl;
 
     ll gen_gcd = diff[0];
-    //   ll tmp = diff[0];
-    for (int i = 1; i < diff.size(); i++)
-    {
-        gen_gcd = __gcd(gen_gcd, diff[i]);
-    }
 
-    ll ans = 0,ans2;
+    for (int i = 1; i < diff.size(); i++)
+        gen_gcd = __gcd(gen_gcd, diff[i]);
+
+    ll ans = 0;
+
     for (auto u : diff)
     {
         ans += u / gen_gcd;
     }
-    ans2 = ans + n;
+
     ll tt = mx;
-    //    ll mxx = *max_element(diff.begin(),diff.end());
-    while(true)
+    while (true)
     {
         tt = tt - gen_gcd;
         ans += 1;
-        if(!st.count(tt))
+        if (!st.count(tt))
         {
             break;
         }
-        
     }
 
-    cout << min(ans2,ans) << endl;
+    cout << ans << endl;
 }
 
 int main()
