@@ -39,10 +39,10 @@ void solve(int cs)
 
     ll ans = 0;
 
+
     for (auto u : diff)
-    {
         ans += u / gen_gcd;
-    }
+
 
     ll tt = mx;
     while (true)
