@@ -14,7 +14,7 @@ void solve(int cs)
     cin >> n;
     bool ok = true;
     vector<ll> v(n), diff;
-    unordered_set<ll> st;
+    set<ll> st;
     for (int i = 0; i < n; i++)
     {
         cin >> v[i];
