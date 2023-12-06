@@ -7,36 +7,28 @@ using namespace std;
 
 
 void solve(int cs){
-    ll n;
-    cin >> n ;
-    vector<ll> v(n);
 
-    for(int i = 0 ; i < n ; i++)
+  //  char vower[] = {'A','E','I','O','u'};
+    set<char> vowel ={'A','E','I','O','u'};
+
+    string ss,s = "CODETOWN";
+    cin >> ss;
+
+    bool ok = true;
+
+    for(int i = 0 ; i < ss.length() ; i ++)
     {
-        cin >> v[i];
+        if(vowel.count(ss[i]) != vowel.count(s[i]))ok = false;
     }
 
-    vector<ll> suff(n);
-
-    suff[0] = v[n-1];
-
-    for(int i = 1,j = n-2 ; i < n ; i ++ , j --)
-    {
-        suff[i] = suff[i-1] + v[j]; 
-    }
-
-    ll ans = suff[n-1];
-
-    for(int i = 0 ; i < n-1 ; i++)if(suff[i]>0)ans+= suff[i];
-
-    cout << ans << endl;
+    cout << (ok?"YES\n":"NO\n");
     
 }
 
 int main(){
     fast;
     int t=1;
-   cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++)
     {
        // cout << "Case " << i  << ":\n";

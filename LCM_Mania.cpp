@@ -7,36 +7,29 @@ using namespace std;
 
 
 void solve(int cs){
+
     ll n;
-    cin >> n ;
-    vector<ll> v(n);
+    cin >> n;
 
-    for(int i = 0 ; i < n ; i++)
+    if(n%3==0)
     {
-        cin >> v[i];
+        ll ans = n/3;
+
+        cout << ans <<" "<< ans << " " << 1 << endl;
+
     }
-
-    vector<ll> suff(n);
-
-    suff[0] = v[n-1];
-
-    for(int i = 1,j = n-2 ; i < n ; i ++ , j --)
+    else 
     {
-        suff[i] = suff[i-1] + v[j]; 
+        cout << -1 << endl;
+
     }
-
-    ll ans = suff[n-1];
-
-    for(int i = 0 ; i < n-1 ; i++)if(suff[i]>0)ans+= suff[i];
-
-    cout << ans << endl;
     
 }
 
 int main(){
     fast;
     int t=1;
-   cin>>t;
+    cin>>t;
     for(int i=1;i<=t;i++)
     {
        // cout << "Case " << i  << ":\n";
