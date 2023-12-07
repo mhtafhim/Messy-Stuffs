@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events List</title>
+  <style>
+    .container {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .event-list {
+      width: 500px;
+      max-height: 300px;
+      overflow-y: scroll;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="event-list">
+      <ul>
+        <li>Event Title 1</li>
+        <li>Event Title 2</li>
+        <li>Event Title 3</li>
+        <li>Event Title 4</li>
+        <li>Event Title 5</li>
+        <li>Event Title 1</li>
+        <li>Event Title 2</li>
+        <li>Event Title 3</li>
+        <li>Event Title 4</li>
+        <li>Event Title 5</li>
+        <li>Enthusiastic Baking Bonanza</li>
+        <li>Mystical Moon Gazing Marathon</li>
+        <li>Compost Club Conference</li>
+        <li>Unleashing Creativity through Clay</li>
+        <li>Decoding Dreams: A Group Exploration</li>
+        <li>Salsa Showdown: Beginners & Beyond</li>
+        <li>Mastering the Art of Origami</li>
+        <li>Coding for Good: Hackathon for Social Impact</li>
+        <li>Mindful Meditation for Serenity</li>
+        <li>Board Games Galore: Tournament Night</li>
+        <li>Culinary Adventure: Cooking Up Global Flavors</li>
+        <li>Urban Exploration: Hidden Gems of the City</li>
+        <li>Building Robots: Fun with Robotics for All Ages</li>
+        <li>Community Clean-Up: Making a Difference Together</li>
+        <li>Creative Writing Workshop: Unleash Your Inner Storyteller</li>
+        <li>Financial Fitness for Young Adults</li>
+        <li>Sustainable Living Workshop: Practical Tips for Eco-Friendly Life</li>
+        <li>Photography Masterclass: Capturing the Perfect Moment</li>
+        <li>DIY Workshop: Make Your Own Candles</li>
+        <li>Learn to Code with Scratch: Fun for Kids</li>
+        <li>Open Mic Night: Showcase Your Talents</li>
+        <li>Public Speaking Workshop: Conquering Your Stage Fright</li>
+        <li>Yoga and Meditation Retreat</li>
+        <li>Hiking and Camping Adventure</li>
+        <li>Art & Craft Festival: Discover Local Artists</li>
+        <li>Book Club Discussion: Dive into a Literary Journey</li>
+        <li>Charity Concert: Music for a Cause</li>
+        <li>Family Fun Day: Games, Activities, and Entertainment</li>
+        <li>International Food Festival: Culinary Tour Around the World</li>
+        <li>Movie Night Under the Stars</li>
+        <li>Volunteer Day: Give Back to Your Community</li>
+        <li>Stargazing Party: Exploring the Universe</li>
+        <li>Coding Challenge: Put Your Skills to the Test</li>
+        <li>Art Therapy Workshop: Express Yourself Through Art</li>
+        <li>Healthy Cooking Class: Learn to Cook Delicious and Nutritious Meals</li>
+        <li>Mindfulness Retreat: Find Inner Peace</li>
+        <li>DIY Home Improvement Workshop</li>
+        <li>Board Game Design Challenge: Create Your Own Game</li>
+        <li>Public Speaking Competition: Share Your Voice</li>
+        <li>Sustainable Fashion Swap: Give Your Clothes a Second Life</li>
+        <li>Creative Writing Contest: Unleash Your Storytelling Talent</li>
+        <li>DIY Craft Fair: Showcase Your Handmade Creations</li>
+        </ul>
+    </div>
+  </div>
+  <script>
+    // Add event listeners to each event title for any desired action
+    const eventTitles = document.querySelectorAll('.event-list li');
+
+    eventTitles.forEach(title => {
+      title.addEventListener('click', () => {
+        // Replace this with your desired action
+        alert("Event clicked: " + title.textContent);
+      });
+    });
+  </script>
+</body>
+</html>
