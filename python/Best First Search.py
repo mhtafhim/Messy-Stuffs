@@ -9,7 +9,7 @@ class Node:
     def __lt__(self, other):
         return (self.heuristic) < (other.heuristic)
 
-def best_first_search(start, goal, heuristic):
+def best_first_search(start, goal):
     closed_list = set()
     open_list = [Node(start, None, heuristic(start))]
     
@@ -48,7 +48,7 @@ def heuristic(state):
 start_state = 'A'
 goal_state = 'D'
 
-result = best_first_search(start_state, goal_state, successors, heuristic)
+result = best_first_search(start_state, goal_state)
 
 if result:
     print(f"Path from {start_state} to {goal_state}: {result}")
