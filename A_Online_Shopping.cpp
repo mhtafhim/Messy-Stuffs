@@ -7,7 +7,20 @@ using namespace std;
 
 
 void solve(int cs){
-    
+    ll n,k ,s;
+    cin >> n >> k >> s;
+
+    ll sum =0;
+
+    for(int i = 0 ; i < n ; i ++)
+    {
+        ll a ,b;
+        cin >> a >> b;
+        sum += (a*b);
+    }
+
+    if(sum >= k ) cout << sum << endl;
+    else cout << (ll)(sum+s) << endl;
     
 }
 
