@@ -11,65 +11,45 @@ using namespace std;
 int dx[] = {1, 1, 0, -1, -1, -1, 0, 1};
 int dy[] = {0, 1, 1, 1, 0, -1, -1, -1}; // 8 direction
 vector<string> s(3);
-bool vis[3][3];
-int cost[3][3];
-char parent[3][3];
-
 set<string> st;
-string ss;
 
-void bfs(int x, int y)
+void dfs(int x, int y, int cnt, string tmp, int vis[3][3])
 {
-
-    cout << "ok 1" << endl;
-
-    vector<char> vs;
-    vector<pair<int, int>> prv;
-    // vector<pair<char,pair<int,int>>> vv;
-    int inx, iny;
-  //  char mn = s[x][y];
-    char mn = 'C';
-    int cnt = 0;
-    for (int i = 0; i < 8; i++)
+    tmp += s[x][y];
+    if (cnt == 3)
     {
-        cout << i << endl;
-        if ((x + dx[i]) < 3 && (x + dx[i]) >= 0 && (y + dy[i]) < 3 && (y + dy[i]) >= 0)
-        {
-            if (mn > s[x + dx[i]][y + dy[i]])
-            {
-                mn = s[x + dx[i]][y + dy[i]];
-            }
-        }
+        st.insert(tmp);
+        return;
     }
-    cout << mn << endl;
-   
+    vis[x][y] = true;
 
     for (int i = 0; i < 8; i++)
     {
-        if ((x + dx[i]) < 3 && (x + dx[i]) >= 0 && (y + dy[i]) < 3 && (y + dy[i]) >= 0)
+        if ((x + dx[i]) < 3 && (x + dx[i]) >= 0 && (y + dy[i]) < 3 && (y + dy[i]) >= 0 && !vis[(x + dx[i])][(y + dy[i])])
         {
-            if (mn == s[x + dx[i]][y + dy[i]])
-            {
-                vs.push_back(mn);
-                prv.push_back({x + dx[i], y + dy[i]});
-                cnt++;
-            }
+            dfs((x + dx[i]), (y + dy[i]), cnt + 1, tmp, vis);
         }
     }
-
-    cout << "ok 2" << endl;
-    for (auto u : prv)
-        cout << u.first << " " << u.second << endl;
 }
 
 void solve(int cs)
 {
+    int vis[3][3];
 
     for (int i = 0; i < 3; i++)
         cin >> s[i];
 
-    bfs(2, 2);
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+        {
+            for (int k = 0; k < 3; k++)
+                for (int m = 0; m < 3; m++)
+                    vis[k][m] = false;
 
+            dfs(i, j, 1, "", vis);
+        }
+
+    cout << *st.begin() << endl;
     // cout << s[0][0];
 }
 
