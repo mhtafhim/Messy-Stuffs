@@ -107,7 +107,7 @@ int main()
     cin >> n;
 
     Process processes[n];
-    cout << "\nEnter the cpu time consequtively : ";
+    cout << "\nEnter the cpu time consecutively : ";
     for (int i = 0; i < n; i++)
     {
 
@@ -117,7 +117,7 @@ int main()
         processes[i].waitingTime = 0;
     }
 
-    cout << "\nEnter the arrival time consequtively : ";
+    cout << "\nEnter the arrival time consecutively : ";
     for (int i = 0; i < n; i++)
     {
 
