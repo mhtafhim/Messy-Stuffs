@@ -13,38 +13,41 @@ void solve(int cs)
     ll n, q;
     cin >> n >> q;
 
-    vector<ll> a(n), x(q), ans(n), cnt(31);
+    vector<ll> a(n), x(q);
 
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
-        ans[i] = a[i];
+        
     }
 
     for (int i = 0; i < q; i++)
     {
         cin >> x[i];
-        cnt[x[i]]++;
     }
 
     //  vector<vector<pair<ll, ll>>> cnt(31);
+    ll mn = 1e18;
 
-    for (int i = 1; i <= 30; i++)
+    for (int i = 0; i < q; i++)
     {
-        ll tmp = 1LL << i;
-        for (int j = 0; j < n; j++)
+        if (mn > x[i])
         {
-            if (ans[j] % tmp == 0)
+            mn = x[i];
+            ll tmp = 1LL << x[i];
+            for (int j = 0; j < n; j++)
             {
-               // cout << a[j] << " " << tmp << " " << i << endl;
-                ans[j] += ( cnt[i] * (tmp/2));
+                if (a[j] % tmp == 0)
+                {
+                    // cout << a[j] << " " << tmp << " " << i << endl;
+                    a[j] += (tmp / 2);
+                }
             }
         }
     }
 
-
-
-    for(auto u : ans)cout << u << " " ;
+    for (auto u : a)
+        cout << u << " ";
     cout << endl;
 }
 
@@ -52,7 +55,7 @@ int main()
 {
     fast;
     int t = 1;
-        cin>>t;
+    cin >> t;
     for (int i = 1; i <= t; i++)
     {
         // cout << "Case " << i  << ":\n";
@@ -60,4 +63,3 @@ int main()
     }
     return 0;
 }
- 
