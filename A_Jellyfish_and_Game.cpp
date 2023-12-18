@@ -16,6 +16,8 @@ void solve(int cs)
     vector<ll> a(n), b(m);
     ll suma = 0, sumb = 0;
 
+    // k = k % 4  + 4;
+
     for (int i = 0; i < n; i++)
     {
         cin >> a[i];
@@ -33,21 +35,43 @@ void solve(int cs)
     ll mnb = *min_element(b.begin(), b.end());
     ll mxb = *max_element(b.begin(), b.end());
 
- //   cout << suma << " " << sumb << endl;
-
-    if (mna < mxb)
+    if (k == 1)
     {
-        if (k & 1)
-            cout << max(suma, (suma - mna + mxb)) << endl;
-        else
-            cout << suma << endl;
+        suma = max(suma, suma - mna + mxb);
+        cout << suma << endl;
+    }
+    else if (k == 2)
+    {
+        suma = max(suma, suma - mna + mxb);
+
+        mxa = max(mxa, mxb);
+        mnb = min(mna, mnb);
+
+        suma = min(suma, suma - mxa + mnb);
     }
     else
     {
-        if (k %2==0)
-            cout << (suma - mxa + mnb)<< endl;
-        else
+        suma = max(suma, suma - mna + mxb);
+
+        mxa = max(mxa, mxb);
+        mnb = min(mna, mnb);
+
+        suma = min(suma, suma - mxa + mnb);
+
+// cout << suma << " " ;
+//         cout << mnb << " " << mxa << endl;
+
+        if(k&1) 
+        {
+            suma = max(suma , suma + mxa - mnb);
             cout << suma << endl;
+        }
+        else 
+        {
+         //   suma = min(suma , suma - mxa + mnb);
+            cout << suma << endl;
+        }
+
     }
 }
 

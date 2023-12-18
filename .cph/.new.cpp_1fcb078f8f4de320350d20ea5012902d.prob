@@ -1,0 +1,1 @@
+{"name":"Local: new","url":"c:\\Users\\mhtaf\\Documents\\GitHub\\Messy-Stuffs\\new.cpp","tests":[{"id":1702908319288,"input":"1\n4 3 4\n2 3 5 7\n1 3 5","output":"14"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\mhtaf\\Documents\\GitHub\\Messy-Stuffs\\new.cpp","group":"local","local":true}
