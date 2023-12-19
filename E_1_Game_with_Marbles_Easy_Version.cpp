@@ -21,97 +21,31 @@ void solve(int cs)
     for (auto &z : y)
         cin >> z;
 
-    vector<pair<pair<ll, ll>, ll>> a, b;
+    vector<pair<ll, ll>> v;
 
     for (int i = 0; i < n; i++)
     {
-        a.push_back({{x[i], y[i]}, i});
-        b.push_back({{y[i], x[i]}, i});
+        v.push_back({x[i] + y[i], i});
     }
 
-    sort(a.begin(), a.end(), greater<pair<pair<ll, ll>, ll>>());
-    sort(b.begin(), b.end(), greater<pair<pair<ll, ll>, ll>>());
-
-    // for (pair<pair<ll, ll>, ll> aa : a)
-    //     cout << aa.first.first << " " << aa.first.second << " " << aa.second << endl;
-    // for (pair<pair<ll, ll>, ll> aa : b)
-    //     cout << aa.first.first << " " << aa.first.second << " " << aa.second << endl;
-    vector<bool> vis(n);
-
-    ll cnt = 0;
-
+    sort(v.rbegin(), v.rend());
     ll ans = 0;
-    ll i = 0, j = 0;
 
-    while (cnt < n)
+    for (int i = 0; i < n; i++)
     {
-        //  cout << cnt << " ";
-        while (cnt < n)
+        if (i & 1)
         {
-            if (!vis[a[i].second])
-            {
-                if (a[i].first.first > b[j].first.first)
-                {
-
-                    ans += a[i].first.first - 1;
-                    cnt++;
-                    vis[a[i].second] = true;
-                    i++;
-                    break;
-                }
-                else
-                {
-                    if (!vis[b[j].second])
-                    {
-                        ans += b[j].first.second - 1;
-                        cnt++;
-                        vis[b[j].second] = true;
-                        j++;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                i++;
-            }
+            ans -= y[v[i].second] - 1;
         }
-
-        while (cnt < n)
+        else
         {
-            if (!vis[b[j].second])
-            {
-                if (a[i].first.first < b[i].first.first)
-                {
-
-                    ans -= b[j].first.first - 1;
-                    cnt++;
-                    vis[b[j].second] = true;
-                    j++;
-                    break;
-                }
-
-                else
-                {
-                    {
-                        ans -= a[i].first.second - 1;
-                        cnt++;
-                        vis[a[i].second] = true;
-                        i++;
-                        break;
-                    }
-                                }
-            }
-            else
-            {
-                j++;
-            }
+            ans+= x[v[i].second] -1;
         }
-
-        //    cout << ans << endl;
     }
 
     cout << ans << endl;
+
+   
 }
 
 int main()
