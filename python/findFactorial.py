@@ -1,6 +1,9 @@
-x = 1<<64
-# fact = 1
-# for i in range(1, x+1):
-#     print(hex(i))
-  
-print(x)
+x = 5
+
+
+fact = 1
+
+for i in range(1,x+1)
+    fact*= i
+
+print(fact)
