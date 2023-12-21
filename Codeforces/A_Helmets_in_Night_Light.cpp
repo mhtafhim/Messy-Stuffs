@@ -38,7 +38,7 @@ void solve(int cs)
         {
             auto [a, b] = pr.front();
             pr.pop();
-          //  cout << a << " " << b << endl;
+         
             for (int i = 0; i < b; i++)
             {
                 cost += a;
