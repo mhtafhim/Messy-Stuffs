@@ -1,9 +1,6 @@
-x = 5
+x = 121645100408832000
 
 
-fact = 1
-
-for i in range(1,x+1)
-    fact*= i
-
-print(fact)
+for i in range(1,4):
+    x*=2
+    print(x)
