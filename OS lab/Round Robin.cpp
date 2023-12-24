@@ -89,7 +89,7 @@ void roundRobin(Process processes[], int n, int quantum)
     avgWaitingTime /= n;
     avgTurnaroundTime /= n;
 
-    // Print results
+    
     cout << "\nProcess\tBurst Time\tArrival Time\tWaiting Time\tTurnaround Time" << endl;
     for (int i = 0; i < n; i++)
     {
@@ -103,11 +103,11 @@ int main()
 {
     int n, quantum;
 
-    cout << "Enter the number of processes: ";
+  //  cout << "Enter the number of processes: ";
     cin >> n;
 
     Process processes[n];
-    cout << "\nEnter the cpu time consecutively : ";
+  //  cout << "\nEnter the cpu time consecutively : ";
     for (int i = 0; i < n; i++)
     {
 
@@ -117,14 +117,14 @@ int main()
         processes[i].waitingTime = 0;
     }
 
-    cout << "\nEnter the arrival time consecutively : ";
+  //  cout << "\nEnter the arrival time consecutively : ";
     for (int i = 0; i < n; i++)
     {
 
         cin >> processes[i].arrivalTime;
     }
 
-    cout << "\nEnter the time quantum: ";
+  //  cout << "\nEnter the time quantum: ";
     cin >> quantum;
 
     roundRobin(processes, n, quantum);

@@ -14,6 +14,7 @@ struct Process
     bool vis = false;
 };
 
+
 struct ComparePriority
 {
     bool operator()(const Process &a, const Process &b) const
@@ -105,7 +106,7 @@ void preemptivePriority(Process processes[], int n)
     cout << "\nProcess\tBurst Time\tArrival Time\tPriority\tWaiting Time\tTurnaround Time" << endl;
     for (int i = 0; i < n; i++)
     {
-        cout << processes[i].id << "\t\t" << processes[i].burstTime << "\t\t" << processes[i].arrivalTime << "\t\t" << processes[i].priority << "\t\t" << processes[i].waitingTime << "\t\t" << processes[i].turnaroundTime << endl;
+        cout << processes[i].id << "\t\t" << processes[i].burstTime << "     \t" << processes[i].arrivalTime << "\t\t" << processes[i].priority << "\t\t" << processes[i].waitingTime << "\t\t" << processes[i].turnaroundTime << endl;
     }
     cout << "Average Waiting Time: " << avgWaitingTime << endl;
     cout << "Average Turnaround Time: " << avgTurnaroundTime << endl;
