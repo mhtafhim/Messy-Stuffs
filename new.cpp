@@ -33,7 +33,7 @@ void solve(int cs)
     ll mnb = *min_element(b.begin(), b.end());
     ll mxb = *max_element(b.begin(), b.end());
 
- //   cout << suma << " " << sumb << endl;
+    cout << suma << " " << sumb << endl;
 
     if (mna < mxb)
     {
@@ -61,5 +61,5 @@ int main()
         // cout << "Case " << i  << ":\n";
         solve(i);
     }
-    return 0;
+  
 }
