@@ -14,7 +14,7 @@ void solve(int cs)
     ll n;
     cin >> n;
 
-    vector<ll> v(n);
+    vector<ll> v(n),preff(n);
 
     for (int i = 0; i < n; i++)
     {
@@ -23,26 +23,28 @@ void solve(int cs)
             v[i] = -v[i];
     }
 
-    int max_so_far = INT_MIN, max_ending_here = 0;
+    set<ll> st;
 
-    for (int i = 0; i < n; i++)
+    preff[0] = v[0];
+    st.insert(preff[0]);
+    for(int i = 1 ; i < n ; i ++)
     {
-        max_ending_here = max_ending_here + v[i];
-        if (max_so_far < max_ending_here)
-            max_so_far = max_ending_here;
+        preff[i] = preff[i-1] + v[i];
+     //   cout << preff[i] << " ";
+        if(st.count(preff[i]) || preff[i]==0)
+        {
+            cout << "YES" << endl;
+            return;
 
-
-        // if(max_ending_here==0)
-        // {
-        //     cout << "YES" << endl;
-        //     return;
-        // }
-
-        if (max_ending_here < 0)
-            max_ending_here = 0;
+        }
+        else
+        {
+            st.insert(preff[i]);
+        }
     }
 
-    cout << max_ending_here << endl;
+//cout << endl;
+  
 
     cout << "NO" << endl;
     return;
