@@ -49,7 +49,8 @@ void solve(int cs)
         ll upper = upper_bound(a.second.begin(), a.second.end(), up) - a.second.begin();
         // if(upper != 0)
         // cout << "upper =";
-       cout << upper - 1 << endl;
+        cout << cnt << " ";
+       cout << a.second[upper-1] << endl;
         if (a.second[upper-1] > 0)
         {
             cnt -= upper -1 - (a.first - last - 1);
@@ -79,7 +80,7 @@ int main()
     }
     return 0;
 }
-
+ 
 /*
 5 3 3 5 2 4 5 2 1
 
