@@ -14,58 +14,84 @@ void solve(int cs)
     ll n;
     cin >> n;
 
-    vector<ll> v(n);
+    vector<ll> v(n), trac(n), preff(n);
+    ll min = 1e18;
+    ll inx = -1;
 
     for (int i = 0; i < n; i++)
-        cin >> v[i];
-
-    map<ll, vector<ll>> mp;
-
-    for (ll i = 0; i < n; i++)
     {
-        mp[v[i]].push_back(i);
+        cin >> v[i];
     }
 
-    ll cnt = n;
-    ll up = n - 1;
+    ll mn = v[0];
     ll last = 0;
+    trac[0] = v[0];
 
-    //    cout << cnt << endl;
-
-    // for (auto x : mp)
-    // {
-    //     cout << x.first << endl;
-    //     for (auto y : x.second)
-    //         cout << y << " ";
-    //     cout << endl;
-    // }
-
-    // cout << endl
-    //      << endl;
-
-    for (auto a : mp)
+    for (int i = 0; i < n; i++)
     {
-
-        ll upper = upper_bound(a.second.begin(), a.second.end(), up) - a.second.begin();
-        // if(upper != 0)
-        // cout << "upper =";
-        cout << cnt << " ";
-       cout << a.second[upper-1] << endl;
-        if (a.second[upper-1] > 0)
+        if (mn == v[i])
         {
-            cnt -= upper -1 - (a.first - last - 1);
-            up = a.second[0] - 1;
-            last = a.first;
+            trac[last] = 0;
+            trac[i] = v[i];
+            last = i;
+        }
+        else if (mn > v[i])
+        {
+            trac[i] = v[i];
+            last = i;
+            mn = v[i];
+        }
+    }
+
+    reverse(trac.begin(), trac.end());
+
+    ll cnt = 0;
+
+    if (trac[0] != 0 )
+    {
+        cnt = (trac[0] < n ? trac[0] : n);
+      //  cnt = trac[0];
+        preff[0] = trac[0];
+    }
+    
+
+    bool ok = true;
+
+    for (int i = 1, j = n - 1; i < n - 1; i++, j--)
+    {
+        if (trac[i] - preff[i - 1] >= j)
+            ok = false;
+        if (trac[i] != 0 and ok)
+        {
+
+            cnt += trac[i] - preff[i - 1];
+            preff[i] = preff[i - 1] + (trac[i] - preff[i - 1]);
         }
         else
         {
-            break;
+            // if(cnt == 0)cnt++;
+            preff[i] = preff[i - 1];
         }
     }
+    preff[n - 1] = preff[n - 2];
 
-    //   cout << "ans  = ";
-    cout << min(n, cnt) << endl;
-    cout << endl;
+    reverse(preff.begin(), preff.end());
+
+    for (int i = 0; i < n; i++)
+    {
+        if (preff[i] != v[i])
+            cnt++;
+    }
+
+    // for (auto x : trac)
+    //     cout << x << " ";
+    // cout << endl;
+
+    // for (auto x : preff)
+    //     cout << x << " ";
+    // cout << endl;
+
+    cout << cnt << endl;
 }
 
 int main()
@@ -80,25 +106,9 @@ int main()
     }
     return 0;
 }
- 
-/*
-5 3 3 5 2 4 5 2 1
 
+// 5 3 3 5 2 4 5 2 1
 
+// 5 0 3 0 0 0 0 2 1
 
-1
-
-4 2 2 4 1 3 4 1 0
-
-1
-
-3 1 1 3 0 2 3 0 0
-
-1
-
-2 0 0 2 0 2 3 0 0
-
-
-1 2 3 3 3 3 5
-
-*/
+// 1  2-1=1+1=2 2 2 2 2 3-2=1+2=3 3
