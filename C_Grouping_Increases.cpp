@@ -19,35 +19,57 @@ void solve(int cs)
     for (int i = 0; i < n; i++)
         cin >> v[i];
 
+    ll s = v[0], t = -1;
     ll cnt = 0;
 
-    //  cout << "somossa ki ? " << endl;
+    // if (n > 1)
+    //     t = v[1];
 
-    //   ll mn = v[0];
-    a.push_back(v[0]);
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i < n; i++)
     {
-        if (a[a.size() - 1] >= v[i])
+        if (s >= t)
         {
-            a.push_back(v[i]);
+            if (t >= v[i])
+            {
+                t = v[i];
+            }
+            else
+            {
+                if (s >= v[i])
+                {
+                    s = v[i];
+                }
+                else if (t == -1)
+                    t = v[i];
+                else
+                {
+                    cnt++;
+                    s = v[i];
+                }
+            }
         }
         else
         {
-            b.push_back(v[i]);
+            if (s >= v[i])
+            {
+                s = v[i];
+            }
+            else
+            {
+                if (t >= v[i])
+                {
+                    t = v[i];
+                }
+                else
+                {
+                    cnt++;
+                    t = v[i];
+                }
+            }
         }
     }
 
-    
-    if (b.size() > 1)
-        for (int i = 0; i < b.size() - 1; i++)
-        {
-            if (b[i] < b[i + 1])
-                cnt++;
-        }
-
     cout << cnt << endl;
-    // cout << max((ll)0,cnt-1) << endl;
-    // return ;
 }
 
 int main()
@@ -65,15 +87,9 @@ int main()
 
 // 8 1 8 2 2 7 4 3
 
-
 // 1 8   2 7
 
-// 8 1 
-
-
-
-
-
+// 8 1
 
 // 8 2 1 1    8 7 4 3
 
@@ -83,17 +99,14 @@ int main()
 
 //     8 2 1 1 3 7 4 3
 
-
-
-
 // 1 2 3 4 5 6
 
 // 1 2 3   4 5 6
 
 // 10 13 15 8 18 9 2
 
-//13  18 9 2   10 
-// 10 13 8 2      15 18 9
+// 13  18 9 2   10
+//  10 13 8 2      15 18 9
 
 // 10 8 9 2      15 8 18 9
 
@@ -103,32 +116,28 @@ int main()
 
 //  5 3 1  4 2
 
-
 // 10 13 15 28 18 9 2
-
-
-
 
 // 10 13
 // 13 15
 // 15 18
 
-
-
-
-
-// 13  9 2    
+// 13  9 2
 
 // 10 15 28 18
 
-
 // 100 51  2 50 3 49 4 48
 
+// 2 50  3 49 4 48
 
 
-2 50  3 49 4 48
+// 10 1 15 7 18 9 2
+
+// 10 
+
+// 1
 
 
+// 10 7 18 
 
-
-
+// 1 15 9 2
