@@ -71,6 +71,7 @@ void solve(int cs)
         }
     }
 
+//:)
     cout << cnt << endl;
 }
 
