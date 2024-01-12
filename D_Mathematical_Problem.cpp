@@ -15,6 +15,7 @@ void solve(int cs){
     cout << n << endl;
 
 
+    for()
     
 }
 
