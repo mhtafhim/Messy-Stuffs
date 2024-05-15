@@ -1,0 +1,1 @@
+#include<stdio.h>intmain(void){FILE*p1,*p2;charc;p1=fopen("20200204006.c","r");p2=fopen("parentheses.txt","w");if(!p1)printf("\nFilecan'tbeopened!");else{while((c=fgetc(p1))!=EOF){if(c!='\n'&&c!='')fputc(c,p2);}}fclose(p1);fclose(p2);p2=fopen("parentheses.txt","r");while((c=fgetc(p2))!=EOF)printf("%c",c);fclose(p2);return0;}
