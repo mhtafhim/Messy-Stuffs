@@ -71,28 +71,7 @@ int main() {
     
 
 
-    string msg;
-    getline(cin,msg);
-
-    if(msg.length()%2 == 1)msg.push_back('x');
-
-
-    vector<long long int>encoded_msg;
-
-    for(int i = 0 ; i < msg.length() ; i+=2)
-    {
-        long long int tmp = msg[i];
-        tmp = 100*tmp + msg[i+1];
-        encoded_msg.push_back(tmp);
-    }
-
-    for(auto x: encoded_msg)cout << x << " ";
-    cout << endl;
-
-
-
-
-
+   
 
 
     long long int message = 3314;
