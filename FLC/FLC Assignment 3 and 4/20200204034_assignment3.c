@@ -73,14 +73,9 @@ void display()
 void remove_comment()
 {
      FILE *fp1,*fp2;
-    fp1 = fopen("input.c","r");
+    fp1 = fopen("input.txt","r");
     fp2 = fopen("output.txt","w");
     char c;
-    while((c=fgetc(fp1))!=EOF)
-    {
-        printf("%c",c);
-    }
-    rewind(fp1);
 
     bool quote = false;
     while((c=fgetc(fp1))!=EOF)
@@ -338,7 +333,7 @@ void leximCategorize()
 
      fp3 = fopen("output3.txt","r");
     char c;
-    printf("Lexeme Catagorize :\n");
+    printf("\nLexeme Catagorize :\n");
     while((c=fgetc(fp3))!=EOF)
     {
         printf("%c",c);
@@ -512,7 +507,7 @@ void modifiedTokenStream()
     fp2 = fopen("output5.txt","w");
 
 
- 
+
 
     char str[1024];
     char identName[1024];

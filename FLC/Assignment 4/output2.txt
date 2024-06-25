@@ -1,0 +1,1 @@
+123float id x1=3.125;;;45double id f1(floata,int id int id x)6{if(x<x1)7double id z;;8elsez=0.01;}}9elsereturnz;10}1112int id main(void)13{{{{14int id n1;double id z;15n1=25;z=f1(n1);}
