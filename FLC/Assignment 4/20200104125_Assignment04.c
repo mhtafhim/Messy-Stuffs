@@ -417,8 +417,8 @@ int main()
     fclose(ptr);
 
     printf("\n------------------------------\nErrors:");
- //   duplicateErrors(inp,inpi);
- //   kwIdChecker(inp,inpi);
+    duplicateErrors(inp,inpi);
+    kwIdChecker(inp,inpi);
 
     return 0;
 }
