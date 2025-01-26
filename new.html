@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+</head>
+<body>
+<canvas id="webglCanvas" width="500" height="500"></canvas>
+<script>
+    const canvas = document.getElementById("webglCanvas");
+    const gl = canvas.getContext("webgl");
+
+   
+    const vertexShaderSource = `
+        attribute vec2 aPosition;
+        void main() {
+            gl_Position = vec4(aPosition, 0.0, 1.0);
+        }
+    `;
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertexShaderSource);
+    gl.compileShader(vertexShader);
+
+
+    const fragmentShaderSource = `
+        precision mediump float;
+        void main() {
+            gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0); // Yellow
+        }
+    `;
+    
+    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragmentShader, fragmentShaderSource);
+    gl.compileShader(fragmentShader);
+
+
+    const shaderProgram = gl.createProgram();
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+    gl.useProgram(shaderProgram);
+
+
+    const vertices = new Float32Array([
+        0.0,  0.6,  // Top vertex
+       -0.3,  -0.4,  // Bottom-left
+        0.3,  -0.4,  // Bottom-right
+
+        0.0,  0.6,  // Top vertex
+        0.5,  0.2,  // Bottom-right
+        0.3, -0.4,  // Bottom-right corner
+
+        0.0,  0.6,  // Top vertex
+       -0.3, -0.4,  // Bottom-left corner
+       -0.5,  0.2   // Bottom-left
+    ]);
+
+    // Create Buffer
+    const vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+    // Bind Buffer to Shader
+    const positionLocation = gl.getAttribLocation(shaderProgram, "aPosition");
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLocation);
+
+    // Draw the Pentagon
+    gl.clearColor(0.0, 0.0, 0.5, 1.0); // Dark blue background
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 9);
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<canvas id="webglCanvas" width="500" height="500"></canvas>
+<script>
+    const canvas = document.getElementById("webglCanvas");
+    const gl = canvas.getContext("webgl");
+
+    const vertexShaderSource = `
+        attribute vec2 aPosition;
+        void main() {
+            gl_PointSize = 2.0;
+            gl_Position = vec4(aPosition, 0.0, 1.0);
+        }
+    `;
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertexShader, vertexShaderSource);
+    gl.compileShader(vertexShader);
+
+    const fragmentShaderSource = `
+        precision mediump float;
+        uniform vec4 uColor;
+        void main() {
+            gl_FragColor = uColor;
+        }
+    `;
+    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragmentShader, fragmentShaderSource);
+    gl.compileShader(fragmentShader);
+
+    const shaderProgram = gl.createProgram();
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+    gl.useProgram(shaderProgram);
+
+    const generateEpicycloidPoints = (R, r, numPoints, scale) => {
+        const k = (R + r) / r;
+        const points = [];
+        for (let i = 0; i <= numPoints; i++) {
+            const t = (Math.PI * 2 * i) / numPoints;
+            const x = scale * ((R + r) * Math.cos(t) - r * Math.cos(k * t));
+            const y = scale * ((R + r) * Math.sin(t) - r * Math.sin(k * t));
+            points.push(x, y);
+        }
+        return new Float32Array(points);
+    };
+
+    const renderEpicycloid = (cusps) => {
+        const r = R / cusps;
+        const points = generateEpicycloidPoints(R, r, 1000, scale);
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, points, gl.STATIC_DRAW);
+        gl.clearColor(1.0, 1.0, 0.8, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        const randomColor = [Math.random(), Math.random(), Math.random(), 1.0];
+        gl.uniform4fv(colorLocation, randomColor);
+        gl.drawArrays(gl.POINTS, 0, points.length / 2);
+    };
+
+    const R = 0.4;
+    let cusps = 3;
+    const scale = 1;
+
+    const vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+    const positionLocation = gl.getAttribLocation(shaderProgram, "aPosition");
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(positionLocation);
+
+    const colorLocation = gl.getUniformLocation(shaderProgram, "uColor");
+
+    renderEpicycloid(cusps);
+
+    canvas.addEventListener("click", () => {
+        cusps++;
+        renderEpicycloid(cusps);
+    });
+</script>
+</body>
+</html>
