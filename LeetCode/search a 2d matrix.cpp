@@ -14,7 +14,7 @@ public:
 
         while (low < hi) {
             mid = (low + hi) / 2;
-         //   cout << matrix[mid][0] << "  " << matrix[mid][n - 1] << endl;
+         
 
             if (matrix[mid][0] <= target && matrix[mid][n - 1] >= target) {
               //  cout << "dukse" << endl;
